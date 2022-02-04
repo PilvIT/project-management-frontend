@@ -1,15 +1,44 @@
 import { FaGithub } from "react-icons/fa";
-import { jsonFetch } from "../core/jsonFetch";
+import { GitHubOAuthService } from "../core/features/github/GitHubOAuthService";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
-export const Login = () => {
+interface Props {
+  onLoggedIn: () => void;
+}
+
+export const Login = ({ onLoggedIn }: Props) => {
+  const router = useRouter();
+
   const handleLogin = () => {
-    jsonFetch("POST", "/github/auth", {
-      redirectUri: `${location.origin}`,
-    }).then((data) => {
-      localStorage.setItem("aa", data.state);
-      window.open(data.url, "_self");
+    GitHubOAuthService.login(location.origin).catch(() => {
+      // TODO: handle error
     });
   };
+
+  useEffect(() => {
+    console.log(router.query);
+    if (
+      typeof router.query.code === "string" &&
+      typeof router.query.state === "string"
+    ) {
+      GitHubOAuthService.exchangeToken({
+        code: router.query.code,
+        state: router.query.state,
+        redirectUri: location.origin,
+      })
+        .then(async () => {
+          onLoggedIn();
+          await router.replace(location.pathname, undefined, {
+            shallow: true,
+          });
+        })
+        .catch((e) => {
+          console.error(e);
+          // TODO: handle error
+        });
+    }
+  }, [onLoggedIn, router]);
 
   return (
     <div className="flex flex-col items-center mx-3">

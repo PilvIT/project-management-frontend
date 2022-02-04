@@ -1,5 +1,7 @@
 // A thin wrapper for fetch
 
+import { LocalStorageKeys } from "../constants/LocalStorageKeys";
+
 type Methods = "GET" | "POST" | "PUT" | "DELETE";
 export const jsonFetch = async (
   method: Methods,
@@ -23,7 +25,7 @@ const getHeaders = (): Record<string, string> => {
     "Content-Type": "application/json",
   };
 
-  const token: string | null = localStorage.getItem("auth-token");
+  const token: string | null = localStorage.getItem(LocalStorageKeys.AuthToken);
   if (token) {
     return {
       ...headers,
