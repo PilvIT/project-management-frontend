@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 const classes = {
   link: "",
-  button: "block object-right bg-fuchsia-600 text-white p-2 rounded-md w-fit",
+  button: "block object-right bg-slate-600 text-white p-2 rounded-md w-fit",
 };
 
 interface Props {
