@@ -1,3 +1,3 @@
-export default function Home() {
-  return <div>Authenticated</div>;
+export default function IndexPage() {
+  return <div>asd</div>;
 }

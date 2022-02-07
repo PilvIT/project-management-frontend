@@ -1,5 +1,5 @@
 import { FaGithub } from "react-icons/fa";
-import { GitHubOAuthService } from "../core/features/github/GitHubOAuthService";
+import { GitHubOAuthService } from "../../core/features/github/GitHubOAuthService";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
@@ -17,7 +17,6 @@ export const Login = ({ onLoggedIn }: Props) => {
   };
 
   useEffect(() => {
-    console.log(router.query);
     if (
       typeof router.query.code === "string" &&
       typeof router.query.state === "string"

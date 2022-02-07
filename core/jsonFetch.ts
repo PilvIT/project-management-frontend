@@ -6,12 +6,12 @@ type Methods = "GET" | "POST" | "PUT" | "DELETE";
 export const jsonFetch = async (
   method: Methods,
   url: `/${string}`,
-  data: object
+  data?: object
 ) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_HOST}${url}`, {
     method,
     headers: getHeaders(),
-    body: JSON.stringify(data),
+    body: method === "GET" ? undefined : JSON.stringify(data),
   });
 
   if (response.ok) {
