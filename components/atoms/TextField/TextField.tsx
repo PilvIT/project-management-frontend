@@ -7,6 +7,7 @@ import {
 } from "react-hook-form";
 
 interface Props<Form> {
+  type?: "url";
   error: FieldErrors;
   label: string;
   name: Path<Form>;
@@ -21,6 +22,7 @@ export const TextField = <T,>({
   label,
   name,
   placeholder,
+  type,
   register,
   required,
   validation,
@@ -38,9 +40,10 @@ export const TextField = <T,>({
           },
           ...validation,
         })}
-        aria-invalid={errorField ? true : false}
+        aria-invalid={!!errorField}
         className="border border-solid border-slate-400 rounded-md focus:outline-1 focus:outline-blue-400 p-2"
         placeholder={placeholder}
+        type={type}
       />
       {errorField && (
         <small className="text-red-500" role="alert">

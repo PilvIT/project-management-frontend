@@ -7,15 +7,21 @@ const classes = {
 };
 
 interface Props {
+  className?: string;
   children: ReactNode;
   href: string;
   appearance?: "link" | "button";
 }
 
-export const Link = ({ appearance = "link", children, href }: Props) => {
+export const Link = ({
+  className,
+  appearance = "link",
+  children,
+  href,
+}: Props) => {
   return (
     <NextLink href={href}>
-      <a className={classes[appearance]}>{children}</a>
+      <a className={`${classes[appearance]} ${className}`}>{children}</a>
     </NextLink>
   );
 };

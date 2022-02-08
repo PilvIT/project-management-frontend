@@ -1,6 +1,6 @@
 import { CreateProjectForm } from "../../components/forms/CreateProjectForm";
 import { PageTitle } from "../../components/atoms/PageTitle/PageTitle";
-import { ProjectModel } from "../../types/models/ProjectModel";
+import { ProjectModel } from "../../core/projects/models/ProjectModel";
 import { useRouter } from "next/router";
 
 export default function CreatePage() {

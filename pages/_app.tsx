@@ -20,7 +20,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         refreshInterval: 0,
       }}
     >
-      <LayoutAuthenticated>
+      <LayoutAuthenticated onLogout={user.logout}>
         <Component {...pageProps} />
       </LayoutAuthenticated>
     </SWRConfig>

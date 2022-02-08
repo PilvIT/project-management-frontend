@@ -1,7 +1,8 @@
 import { Link } from "../../components/atoms/Link";
 import { PageTitle } from "../../components/atoms/PageTitle/PageTitle";
 import useSWR from "swr";
-import { ProjectModel } from "../../types/models/ProjectModel";
+import { ProjectModel } from "../../core/projects/models/ProjectModel";
+import NextLink from "next/link";
 
 export default function ProjectPage() {
   const { data, error } = useSWR("/projects");
@@ -15,17 +16,21 @@ export default function ProjectPage() {
 
       {data &&
         data.map((project: ProjectModel) => (
-          <a
-            href={`/projects/${project.id}`}
+          <NextLink
             key={project.id}
-            className={`border border-gray-200 p-4 shadow-md rounded-md hover:cursor-pointer hover:border-blue-300`}
+            href={`/projects/${project.id}`}
+            prefetch={false}
           >
-            <div>
-              <h2 className="text-md font-bold py-2">
-                {project.group} / {project.name}
-              </h2>
-            </div>
-          </a>
+            <a
+              className={`border border-gray-200 p-4 shadow-md rounded-md hover:cursor-pointer hover:border-blue-300`}
+            >
+              <div>
+                <h2 className="text-md font-bold py-2">
+                  {project.group} / {project.name}
+                </h2>
+              </div>
+            </a>
+          </NextLink>
         ))}
     </div>
   );

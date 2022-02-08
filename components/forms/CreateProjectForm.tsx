@@ -1,8 +1,8 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { TextField } from "../atoms/TextField/TextField";
 import { Button } from "../atoms/Button/Button";
-import { ProjectCreateModel } from "../../types/models/ProjectCreateModel";
-import { ProjectModel } from "../../types/models/ProjectModel";
+import { ProjectCreateModel } from "../../core/projects/models/ProjectCreateModel";
+import { ProjectModel } from "../../core/projects/models/ProjectModel";
 import { jsonFetch } from "../../core/jsonFetch";
 
 interface Props {
