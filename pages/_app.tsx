@@ -1,16 +1,24 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { Login } from "../components/organisms/Login";
-import { useUser } from "../components/hooks/useUser";
 import { LayoutAuthenticated } from "../components/LayoutAuthenticated";
-import { SWRConfig } from "swr";
+import useSWR, { SWRConfig } from "swr";
 import { jsonFetch } from "../core/jsonFetch";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  const user = useUser();
+  const user = useSWR("/user", (url) => jsonFetch("GET", url));
 
-  if (!user.loggedIn) {
-    return <Login onLoggedIn={user.reload} />;
+  const handleOnLogout = async () => {
+    localStorage.clear();
+    await user.mutate();
+  };
+
+  if (!user.data && user.isValidating) {
+    return null;
+  }
+
+  if (!user.data) {
+    return <Login onLoggedIn={user.mutate} />;
   }
 
   return (
@@ -20,7 +28,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         refreshInterval: 0,
       }}
     >
-      <LayoutAuthenticated onLogout={user.logout}>
+      <LayoutAuthenticated onLogout={handleOnLogout}>
         <Component {...pageProps} />
       </LayoutAuthenticated>
     </SWRConfig>
