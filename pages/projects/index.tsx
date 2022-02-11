@@ -2,15 +2,20 @@ import { Link } from "../../components/atoms/Link";
 import { PageTitle } from "../../components/atoms/PageTitle/PageTitle";
 import useSWR from "swr";
 import { ProjectModel } from "../../core/projects/models/ProjectModel";
+import NextHead from "next/head";
 import NextLink from "next/link";
 
 export default function ProjectPage() {
   const { data, error } = useSWR("/projects");
 
   return (
-    <div className="flex flex-col gap-5 m-4">
+    <div className="col-span-10 col-start-2 flex flex-col space-y-5">
+      <NextHead>
+        <title>Projects</title>
+      </NextHead>
+
       <PageTitle>Projects</PageTitle>
-      <Link href="/projects/create" appearance="button">
+      <Link to="/projects/create" appearance="button">
         Add Project
       </Link>
 
@@ -26,7 +31,7 @@ export default function ProjectPage() {
             >
               <div>
                 <h2 className="text-md font-bold py-2">
-                  {project.group} / {project.name}
+                  {project.displayName}
                 </h2>
               </div>
             </a>

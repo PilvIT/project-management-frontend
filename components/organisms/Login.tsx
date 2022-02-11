@@ -2,6 +2,8 @@ import { FaGithub } from "react-icons/fa";
 import { GitHubOAuthService } from "../../core/features/github/GitHubOAuthService";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { PageTitle } from "../atoms/PageTitle/PageTitle";
+import { Button } from "../atoms/Button/Button";
 
 interface Props {
   onLoggedIn: () => void;
@@ -40,15 +42,14 @@ export const Login = ({ onLoggedIn }: Props) => {
   }, [onLoggedIn, router]);
 
   return (
-    <div className="flex flex-col items-center mx-3">
-      <h1 className="text-6xl block my-5 ">Project Management</h1>
-      <button
-        onClick={handleLogin}
-        className="bg-fuchsia-500 text-white flex gap-3 items-center px-3 py-2 rounded-md"
-      >
-        <FaGithub />
-        Sign In
-      </button>
+    <div className="grid place-items-center auto-rows-auto h-screen">
+      <div className="h-4/6 flex flex-col gap-5">
+        <PageTitle>Project Management Login</PageTitle>
+        <Button onClick={handleLogin}>
+          <FaGithub />
+          Sign In
+        </Button>
+      </div>
     </div>
   );
 };

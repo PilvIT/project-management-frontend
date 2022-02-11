@@ -10,7 +10,7 @@ export const LayoutAuthenticated = ({ children, onLogout }: Props) => {
   return (
     <div>
       <Menu onLogout={onLogout} />
-      <div className="m-auto my-5 max-w-[95vw] md:max-w-[80vw]">{children}</div>
+      <div className="grid grid-cols-12 gap-3 mt-8">{children}</div>
     </div>
   );
 };

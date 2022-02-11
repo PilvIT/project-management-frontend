@@ -1,5 +1,5 @@
-import NextLink from "next/link";
 import { ReactNode } from "react";
+import NextLink from "next/link";
 
 const classes = {
   link: "",
@@ -7,20 +7,20 @@ const classes = {
 };
 
 interface Props {
-  className?: string;
-  children: ReactNode;
-  href: string;
   appearance?: "link" | "button";
+  children: ReactNode;
+  className?: string;
+  to: string;
 }
 
 export const Link = ({
   className,
   appearance = "link",
   children,
-  href,
+  to,
 }: Props) => {
   return (
-    <NextLink href={href}>
+    <NextLink href={to}>
       <a className={`${classes[appearance]} ${className}`}>{children}</a>
     </NextLink>
   );

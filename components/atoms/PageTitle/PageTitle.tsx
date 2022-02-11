@@ -6,5 +6,7 @@ interface Props {
 }
 
 export const PageTitle = ({ children, className }: Props) => {
-  return <h1 className={`text-b text-2xl ${className}`}>{children}</h1>;
+  return (
+    <h1 className={`font-serif text-b text-3xl ${className}`}>{children}</h1>
+  );
 };

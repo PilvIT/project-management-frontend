@@ -2,11 +2,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { TextField } from "../atoms/TextField/TextField";
 import { Button } from "../atoms/Button/Button";
 import { ProjectCreateModel } from "../../core/projects/models/ProjectCreateModel";
-import { ProjectModel } from "../../core/projects/models/ProjectModel";
 import { jsonFetch } from "../../core/jsonFetch";
+import { Project } from "../../core/models/Project";
 
 interface Props {
-  onCreated: (project: ProjectModel) => void;
+  onCreated: (project: Project) => void;
 }
 
 export const CreateProjectForm = ({ onCreated }: Props) => {

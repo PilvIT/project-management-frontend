@@ -1,15 +1,17 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../atoms/Button/Button";
-import { GitRepositoryCreateModel } from "../../core/projects/models/GitRepositoryCreateModel";
-import { GitRepositoryModel } from "../../core/projects/models/GitRepositoryModel";
 import { TextField } from "../atoms/TextField/TextField";
 import { jsonFetch } from "../../core/jsonFetch";
 import { useRouter } from "next/router";
 import { Link } from "../atoms/Link";
+import {
+  GitRepositoryCreate,
+  GitRepositoryDetail,
+} from "../../core/models/GitRepository";
 
 interface Props {
   className?: string;
-  onCreated: (data: GitRepositoryModel) => void;
+  onCreated: (data: GitRepositoryDetail) => void;
 }
 
 export const AddGitRepositoryForm = ({ className, onCreated }: Props) => {
@@ -18,9 +20,9 @@ export const AddGitRepositoryForm = ({ className, onCreated }: Props) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<GitRepositoryCreateModel>({ mode: "onBlur" });
+  } = useForm<GitRepositoryCreate>({ mode: "onBlur" });
 
-  const createRepository: SubmitHandler<GitRepositoryCreateModel> = (data) => {
+  const createRepository: SubmitHandler<GitRepositoryCreate> = (data) => {
     jsonFetch("POST", `/git-repositories`, {
       ...data,
       project: router.query.id,
@@ -51,7 +53,7 @@ export const AddGitRepositoryForm = ({ className, onCreated }: Props) => {
           Submit
         </Button>
         <Link
-          href={`/projects/${router.query.id}`}
+          to={`/projects/${router.query.id}`}
           className="bg-none text-gray-400"
         >
           Cancel

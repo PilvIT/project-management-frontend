@@ -17,7 +17,7 @@ export const Button = ({
     <button
       type={type}
       onClick={onClick}
-      className={`bg-fuchsia-600 text-white p-2 rounded-md ${className}`}
+      className={`flex items-center gap-2 bg-fuchsia-600 text-white p-2 rounded-md ${className}`}
     >
       {children}
     </button>
