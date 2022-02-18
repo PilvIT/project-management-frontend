@@ -6,3 +6,13 @@ export interface ProjectDetail {
   name: string;
   repositories: GitRepositoryListDetail[];
 }
+
+export interface ProjectCreate {
+  group: string;
+  name: string;
+}
+
+export interface ProjectListDetail {
+  id: string;
+  displayName: string;
+}

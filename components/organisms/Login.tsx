@@ -45,7 +45,7 @@ export const Login = ({ onLoggedIn }: Props) => {
     <div className="grid place-items-center auto-rows-auto h-screen">
       <div className="h-4/6 flex flex-col gap-5">
         <PageTitle>Project Management Login</PageTitle>
-        <Button onClick={handleLogin}>
+        <Button onClick={handleLogin} styling={{ color: "primary" }}>
           <FaGithub />
           Sign In
         </Button>

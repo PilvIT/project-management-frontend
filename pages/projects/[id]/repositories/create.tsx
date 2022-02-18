@@ -1,12 +1,12 @@
 import { AddGitRepositoryForm } from "../../../../components/forms/AddGitRepositoryForm";
-import { GitRepositoryModel } from "../../../../core/projects/models/GitRepositoryModel";
 import { PageTitle } from "../../../../components/atoms/PageTitle/PageTitle";
 import { useRouter } from "next/router";
+import { GitRepositoryDetail } from "../../../../core/models/GitRepository";
 
 export default function GitRepositoryCreatePage() {
   const router = useRouter();
 
-  const handleOnCreated = async (repository: GitRepositoryModel) => {
+  const handleOnCreated = async (repository: GitRepositoryDetail) => {
     await router.push(`/projects/${router.query.id}`);
   };
 

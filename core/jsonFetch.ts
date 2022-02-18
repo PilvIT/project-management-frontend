@@ -11,7 +11,10 @@ export const jsonFetch = async (
   const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_HOST}${url}`, {
     method,
     headers: getHeaders(),
-    body: method === "GET" ? undefined : JSON.stringify(data),
+    body:
+      method === "GET" || method === "DELETE"
+        ? undefined
+        : JSON.stringify(data),
   });
 
   if (response.ok) {

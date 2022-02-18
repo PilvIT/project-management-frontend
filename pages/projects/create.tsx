@@ -1,18 +1,18 @@
 import { CreateProjectForm } from "../../components/forms/CreateProjectForm";
 import { PageTitle } from "../../components/atoms/PageTitle/PageTitle";
-import { ProjectModel } from "../../core/projects/models/ProjectModel";
 import { useRouter } from "next/router";
+import { ProjectDetail } from "../../core/models/Project";
 
 export default function CreatePage() {
   const router = useRouter();
 
-  const handleCreated = (project: ProjectModel) => {
-    router.push(`/projects/${project.id}`);
+  const handleCreated = async (project: ProjectDetail) => {
+    await router.push(`/projects/${project.id}`);
   };
 
   return (
-    <div className="m-4">
-      <PageTitle>Create Project</PageTitle>
+    <div className="col-start-2 col-end-12">
+      <PageTitle className="mb-5">Create Project</PageTitle>
       <CreateProjectForm onCreated={handleCreated} />
     </div>
   );

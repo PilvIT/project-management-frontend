@@ -1,12 +1,13 @@
+import { ProjectCreate, ProjectDetail } from "../../core/models/Project";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { TextField } from "../atoms/TextField/TextField";
 import { Button } from "../atoms/Button/Button";
-import { ProjectCreateModel } from "../../core/projects/models/ProjectCreateModel";
+import { FaPlus } from "react-icons/fa";
+import { Link } from "../atoms/Link";
+import { TextField } from "../atoms/TextField/TextField";
 import { jsonFetch } from "../../core/jsonFetch";
-import { Project } from "../../core/models/Project";
 
 interface Props {
-  onCreated: (project: Project) => void;
+  onCreated: (project: ProjectDetail) => void;
 }
 
 export const CreateProjectForm = ({ onCreated }: Props) => {
@@ -14,9 +15,9 @@ export const CreateProjectForm = ({ onCreated }: Props) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ProjectCreateModel>({ mode: "onBlur" });
+  } = useForm<ProjectCreate>({ mode: "onBlur" });
 
-  const createProject: SubmitHandler<ProjectCreateModel> = (data) => {
+  const createProject: SubmitHandler<ProjectCreate> = (data) => {
     jsonFetch("POST", "/projects", data).then(onCreated);
   };
 
@@ -53,9 +54,20 @@ export const CreateProjectForm = ({ onCreated }: Props) => {
         }}
         required
       />
-      <Button type="submit" className="mt-5">
-        Create
-      </Button>
+
+      <div className="flex gap-3 mt-5">
+        <Button type="submit" styling={{ color: "primary" }}>
+          <FaPlus />
+          Create
+        </Button>
+        <Link
+          to="/projects"
+          appearance="button"
+          styling={{ color: "secondary" }}
+        >
+          Cancel
+        </Link>
+      </div>
     </form>
   );
 };

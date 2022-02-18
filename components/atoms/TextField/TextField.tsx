@@ -41,6 +41,7 @@ export const TextField = <T,>({
           ...validation,
         })}
         aria-invalid={!!errorField}
+        autoComplete="off"
         className="border border-solid border-slate-400 rounded-md focus:outline-1 focus:outline-blue-400 p-2"
         placeholder={placeholder}
         type={type}

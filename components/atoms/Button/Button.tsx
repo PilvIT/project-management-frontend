@@ -1,23 +1,36 @@
 import { MouseEvent, ReactNode } from "react";
 
+export type ButtonColors = "secondary" | "primary";
+
+export const colors: Record<ButtonColors, string> = {
+  secondary: "bg-gray-500 text-white-300",
+  primary: "bg-teal-700 text-white",
+};
+
 interface Props {
   className?: string;
   children: ReactNode;
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   type?: "submit" | "button";
+  styling: {
+    color: ButtonColors;
+  };
 }
 
 export const Button = ({
   children,
   className,
   onClick,
+  styling,
   type = "button",
 }: Props) => {
   return (
     <button
       type={type}
       onClick={onClick}
-      className={`flex items-center gap-2 bg-fuchsia-600 text-white p-2 rounded-md ${className}`}
+      className={`flex items-center gap-2 p-2 rounded-md ${
+        colors[styling.color]
+      } ${className}`}
     >
       {children}
     </button>

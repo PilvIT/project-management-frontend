@@ -1,4 +1,5 @@
 import { TechnologyDetail } from "./Technology";
+import { IssueDetail } from "./IssueDetail";
 
 export interface GitRepositoryCreate {
   url: `https://${string}`;
@@ -9,6 +10,7 @@ export interface GitRepositoryListDetail {
   name: string;
   description: string;
   technologies: TechnologyDetail[];
+  issues: IssueDetail[];
   url: `https://${string}`;
 }
 
