@@ -1,7 +1,7 @@
 import { CreateProjectForm } from "../../components/forms/CreateProjectForm";
 import { PageTitle } from "../../components/atoms/PageTitle/PageTitle";
-import { useRouter } from "next/router";
 import { ProjectDetail } from "../../core/models/Project";
+import { useRouter } from "next/router";
 
 export default function CreatePage() {
   const router = useRouter();

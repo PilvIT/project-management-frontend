@@ -1,13 +1,13 @@
-import { SubmitHandler, useForm } from "react-hook-form";
-import { Button } from "../atoms/Button/Button";
-import { TextField } from "../atoms/TextField/TextField";
-import { jsonFetch } from "../../core/jsonFetch";
-import { useRouter } from "next/router";
-import { Link } from "../atoms/Link";
 import {
   GitRepositoryCreate,
   GitRepositoryDetail,
 } from "../../core/models/GitRepository";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { Button } from "../atoms/Button/Button";
+import { Link } from "../atoms/Link";
+import { TextField } from "../atoms/TextField/TextField";
+import { jsonFetch } from "../../core/jsonFetch";
+import { useRouter } from "next/router";
 
 interface Props {
   className?: string;
@@ -45,16 +45,16 @@ export const AddGitRepositoryForm = ({ className, onCreated }: Props) => {
         />
       </div>
 
-      <div className="mt-5 flex gap-4">
-        <Button
-          type="submit"
-          className="bg-gradient-to-r from-indigo-500 to-blue-500"
-        >
+      <div className="mt-5 flex items-center gap-4">
+        <Button type="submit" styling={{ color: "primary" }}>
           Submit
         </Button>
         <Link
           to={`/projects/${router.query.id}`}
           className="bg-none text-gray-400"
+          styling={{
+            color: "secondary",
+          }}
         >
           Cancel
         </Link>

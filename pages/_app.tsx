@@ -1,9 +1,9 @@
 import "../styles/globals.css";
+import useSWR, { SWRConfig } from "swr";
 import type { AppProps } from "next/app";
 import { LayoutAuthenticated } from "../components/LayoutAuthenticated";
 import { Login } from "../components/organisms/Login";
 import { jsonFetch } from "../core/jsonFetch";
-import useSWR, { SWRConfig } from "swr";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const user = useSWR("/user", (url) => jsonFetch("GET", url), {
@@ -27,7 +27,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <SWRConfig
       value={{
-        fetcher: (url) => jsonFetch("GET", url, {}),
+        fetcher: (url) =>
+          jsonFetch("GET", url, {}).catch((response) => {
+            if (response.status === 401) {
+              user.mutate(null, false);
+            }
+            return response;
+          }),
         errorRetryCount: 3,
         refreshInterval: 0,
         focusThrottleInterval: 15_000,
