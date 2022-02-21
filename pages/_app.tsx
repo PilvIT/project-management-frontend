@@ -37,11 +37,20 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <SWRConfig
       value={{
         fetcher: (url) =>
-          jsonFetch("GET", url, {}).catch((response) => {
+          jsonFetch("GET", url, {}).catch(async (response) => {
             if (response.status === 401) {
               user.mutate(null, false);
             }
-            return response;
+            return Promise.reject(
+              await response
+                .json()
+                .then((data: unknown) => ({
+                  status: response.status,
+                  url: response.url,
+                  data,
+                }))
+                .catch(() => ({ status: response.status, url: response.url }))
+            );
           }),
         errorRetryCount: 3,
         refreshInterval: 0,
