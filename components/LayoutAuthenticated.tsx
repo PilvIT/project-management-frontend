@@ -8,7 +8,7 @@ interface Props {
 
 export const LayoutAuthenticated = ({ children, onLogout }: Props) => {
   return (
-    <div>
+    <div data-authenticated="true">
       <Menu onLogout={onLogout} />
       <div className="grid grid-cols-12 gap-3 mt-8">{children}</div>
     </div>

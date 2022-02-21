@@ -20,7 +20,7 @@ export const Menu = ({ onLogout }: Props) => {
         <MenuLink href="/developers">Developers</MenuLink>
       </div>
 
-      <button className="flex grow" onClick={onLogout}>
+      <button className="flex grow" onClick={onLogout} aria-label="Log out">
         <FiLogOut className="justify-self-right text-neutral-200" />
       </button>
     </div>

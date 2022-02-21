@@ -1,9 +1,9 @@
+import { Button } from "../atoms/Button/Button";
 import { FaGithub } from "react-icons/fa";
 import { GitHubOAuthService } from "../../core/features/github/GitHubOAuthService";
+import { PageTitle } from "../atoms/PageTitle/PageTitle";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { PageTitle } from "../atoms/PageTitle/PageTitle";
-import { Button } from "../atoms/Button/Button";
 
 interface Props {
   onLoggedIn: () => void;
@@ -15,10 +15,12 @@ export const Login = ({ onLoggedIn }: Props) => {
   const handleLogin = () => {
     GitHubOAuthService.login(location.origin).catch(() => {
       // TODO: handle error
+      console.error("A");
     });
   };
 
   useEffect(() => {
+    console.log(router.query);
     if (
       typeof router.query.code === "string" &&
       typeof router.query.state === "string"

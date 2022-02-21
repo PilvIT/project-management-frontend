@@ -1,5 +1,5 @@
-import { jsonFetch } from "../../jsonFetch";
 import { LocalStorageKeys } from "../../../constants/LocalStorageKeys";
+import { jsonFetch } from "../../jsonFetch";
 
 interface AuthorizationUrl {
   url: string;
@@ -11,7 +11,9 @@ const login = (redirectUri: string): Promise<void> => {
     redirectUri,
   }).then((data: AuthorizationUrl) => {
     localStorage.setItem(LocalStorageKeys.GitHubOAuthState, data.state);
+    console.log(data.url);
     window.open(data.url, "_self");
+    console.log("D");
   });
 };
 

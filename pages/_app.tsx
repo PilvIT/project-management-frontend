@@ -2,11 +2,20 @@ import "../styles/globals.css";
 import useSWR, { SWRConfig } from "swr";
 import type { AppProps } from "next/app";
 import { LayoutAuthenticated } from "../components/LayoutAuthenticated";
+import { LocalStorageKeys } from "../constants/LocalStorageKeys";
 import { Login } from "../components/organisms/Login";
+import { UserModel } from "../types/models/UserModel";
 import { jsonFetch } from "../core/jsonFetch";
 
+const fetchUser = (url: `/${string}`): Promise<UserModel> => {
+  if (localStorage.getItem(LocalStorageKeys.AuthToken)) {
+    return jsonFetch("GET", url);
+  }
+  return Promise.reject(null);
+};
+
 export default function MyApp({ Component, pageProps }: AppProps) {
-  const user = useSWR("/user", (url) => jsonFetch("GET", url), {
+  const user = useSWR<UserModel | null>("/user", fetchUser, {
     errorRetryCount: 0,
     refreshInterval: 0,
   });

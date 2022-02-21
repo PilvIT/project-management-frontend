@@ -39,3 +39,6 @@ yarn-error.log*
 # .idea
 **/.idea/workspace.xml
 **/.idea/tasks.xml
+
+# playwright
+./test-results
