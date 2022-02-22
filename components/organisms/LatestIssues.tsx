@@ -9,6 +9,10 @@ export const LatestIssues = () => {
   const { data, error } = useSWR("/git-repositories?hasIssues=true");
 
   if (data) {
+    if (data.count === 0) {
+      return <p>The projects you are part of does not have any issues.</p>;
+    }
+
     return (
       <div className="grid grid-cols-3 gap-5">
         {data.data.map((repository: GitRepositoryListDetail) => (
@@ -17,9 +21,9 @@ export const LatestIssues = () => {
             href={`/projects/${repository.projectId}`}
           >
             <a>
-              <Card key={repository.id}>
-                <div className="m-3">
-                  <Header className="capitalize mb-2" size="h3">
+              <Card key={repository.id} styling={{ hoverable: true }}>
+                <div className="m-4">
+                  <Header className="capitalize mb-2" size={3}>
                     {repository.name.replaceAll("-", " ")}
                   </Header>
                   <p>{repository.description}</p>
@@ -29,7 +33,7 @@ export const LatestIssues = () => {
                 {/*<div className="bg-red-500 text-center py-2 text-red-100">
               The repository vulnerable dependencies!
             </div>*/}
-                <div className="bg-yellow-400 text-center py-2 text-yellow-800">
+                <div className="bg-yellow-400 text-center py-2 text-yellow-800 mt-8">
                   Vulnerable dependencies detected!
                 </div>
               </Card>

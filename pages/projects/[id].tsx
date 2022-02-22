@@ -1,22 +1,17 @@
-import useSWR from "swr";
-import { useRouter } from "next/router";
-import { PageTitle } from "../../components/atoms/PageTitle";
+import { ErrorBoundary } from "../../components/dev/ErrorBoundary";
+import { GitRepositoryListDetailCard } from "../../components/organisms/GitRepositoryListDetailCard";
+import { Header } from "../../components/atoms/Header";
 import { Link } from "../../components/atoms/Link";
-import { GitRepository } from "../../components/molecules/GitRepository";
 import { ProjectDetail } from "../../core/models/Project";
-import { Paginated } from "../../core/models/Paginated";
-import { GitRepositoryListDetail } from "../../core/models/GitRepository";
+import { SwrListRenderer } from "../../components/templates/SwrListRenderer";
+import { TemporaryFeature } from "../../components/dev/TemporaryFeature";
 import { jsonFetch } from "../../core/jsonFetch";
-
+import { useRouter } from "next/router";
+import useSWR from "swr";
 export default function ProjectPage() {
   const router = useRouter();
   const { id } = router.query;
-  const { data, error, mutate } = useSWR<ProjectDetail>(
-    id && `/projects/${id}`
-  );
-  const gitRepositories = useSWR<Paginated<GitRepositoryListDetail>>(
-    id && `/git-repositories?projectId=${id}`
-  );
+  const { data } = useSWR<ProjectDetail>(id && `/projects/${id}`);
 
   const handleDelete = () => {
     console.info(`Delete project ${id}`);
@@ -32,18 +27,20 @@ export default function ProjectPage() {
   return (
     <div className="col-start-2 col-span-10 space-y-5">
       <header>
-        <PageTitle>
+        <Header size={1}>
           {data.group} / {data.name}
-        </PageTitle>
+        </Header>
         <small className="font-mono text-sm text-gray-400">ID: {data.id}</small>
       </header>
 
-      <button onClick={handleDelete} className="bg-red-300">
-        Delete
-      </button>
+      <TemporaryFeature name="Project Edit">
+        <button onClick={handleDelete} className="bg-red-300">
+          Delete
+        </button>
+      </TemporaryFeature>
 
       <div className="flex justify-between">
-        <h2 className="font-bold text-2xl mb-5">Repositories</h2>
+        <Header size={2}>Repositories</Header>
         <Link
           to={`/projects/${id}/repositories/create`}
           appearance="button"
@@ -54,17 +51,17 @@ export default function ProjectPage() {
         </Link>
       </div>
 
-      {gitRepositories.data && (
-        <div className="space-y-3">
-          {gitRepositories.data.data.map((repository) => (
-            <GitRepository
-              key={repository.id}
-              data={repository}
-              onDeleted={mutate}
-            />
-          ))}
-        </div>
-      )}
+      <ErrorBoundary>
+        {typeof id === "string" && (
+          <SwrListRenderer
+            url={`/git-repositories?projectId=${id}`}
+            placeholder={
+              <p>You have not added any repository to the project.</p>
+            }
+            ItemRenderer={GitRepositoryListDetailCard}
+          />
+        )}
+      </ErrorBoundary>
     </div>
   );
 }

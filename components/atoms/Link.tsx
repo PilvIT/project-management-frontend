@@ -1,10 +1,10 @@
-import { ReactNode } from "react";
+import { ButtonColors, colors as buttonColors } from "./Button";
 import NextLink from "next/link";
-import { colors as buttonColors, ButtonColors } from "./Button";
+import { ReactNode } from "react";
 
 const classes = {
   link: "",
-  button: "block object-right bg-slate-600 text-white p-2 rounded-md w-fit",
+  button: "block py-2 px-4 rounded-md md:w-fit",
 };
 
 interface Colors {
@@ -14,7 +14,7 @@ interface Colors {
 const colors: Colors = {
   link: {
     primary: "",
-    secondary: "",
+    secondary: "text-gray-500",
   },
   button: buttonColors,
 };
@@ -39,9 +39,8 @@ export const Link = ({
   return (
     <NextLink href={to}>
       <a
-        className={`${classes[appearance]} ${
-          colors[appearance][styling.color]
-        } ${className}`}
+        className={`${classes[appearance]}
+          ${colors[appearance][styling.color]} ${className}`}
       >
         {children}
       </a>

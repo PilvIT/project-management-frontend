@@ -7,9 +7,9 @@ interface Props {
 
 export const LayoutAuthenticated = ({ children }: Props) => {
   return (
-    <div>
-      <Menu />
-      <div className="grid grid-cols-12 gap-3 mt-8">{children}</div>
+    <div className="space-y-10 grid grid-cols-12 gap-5">
+      <Menu className={"col-start-2 col-span-10"} />
+      {children}
     </div>
   );
 };

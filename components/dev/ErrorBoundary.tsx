@@ -1,10 +1,13 @@
 import { Component, ErrorInfo } from "react";
 import { ErrorDisplay } from "./ErrorDisplay";
 
-interface Props {}
+interface Props {
+  name?: string;
+}
 
 interface State {
   error: Error | undefined;
+  name?: string;
 }
 /**
  * Catch component-level errors, must be implemented the old way.
@@ -14,7 +17,7 @@ interface State {
 export class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
-    this.state = { error: undefined };
+    this.state = { error: undefined, name: props.name };
   }
 
   static getDerivedStateFromError(error: Error) {
@@ -33,6 +36,7 @@ export class ErrorBoundary extends Component<Props, State> {
             error: this.state.error.name,
             message: this.state.error.message,
           }}
+          name={this.state.name}
         />
       );
     }

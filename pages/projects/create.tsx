@@ -1,5 +1,5 @@
 import { CreateProjectForm } from "../../components/forms/CreateProjectForm";
-import { PageTitle } from "../../components/atoms/PageTitle";
+import { Header } from "../../components/atoms/Header";
 import { ProjectDetail } from "../../core/models/Project";
 import { useRouter } from "next/router";
 
@@ -12,7 +12,9 @@ export default function CreatePage() {
 
   return (
     <div className="col-start-2 col-end-12">
-      <PageTitle className="mb-5">Create Project</PageTitle>
+      <Header size={1} className="mb-5">
+        Create Project
+      </Header>
       <CreateProjectForm onCreated={handleCreated} />
     </div>
   );

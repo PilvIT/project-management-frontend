@@ -1,34 +1,32 @@
+import Head from "next/head";
 import { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
   className?: string;
-  size: "h1" | "h2" | "h3" | "h4";
+  size: 1 | 2 | 3 | 4;
 }
 
 export const Header = ({ children, className, size }: Props) => {
+  const baseClasses = `font-serif text-b ${className}`;
+
   switch (size) {
-    case "h1":
+    case 1:
       return (
-        <h1 className={`font-serif text-b text-4xl ${className}`}>
-          {children}
-        </h1>
+        <>
+          <Head>
+            <title>{children}</title>
+          </Head>
+          <h1 className={`text-4xl ${baseClasses}`}>{children}</h1>
+        </>
       );
-    case "h2":
-      return (
-        <h2 className={`font-serif text-b text-3xl ${className}`}>
-          {children}
-        </h2>
-      );
-    case "h3":
-      return (
-        <h3 className={`font-serif text-b text-xl ${className}`}>{children}</h3>
-      );
-    case "h4":
-      return (
-        <h4 className={`font-serif text-b text-lg ${className}`}>{children}</h4>
-      );
+    case 2:
+      return <h2 className={`text-3xl ${baseClasses}`}>{children}</h2>;
+    case 3:
+      return <h3 className={`text-xl ${baseClasses}`}>{children}</h3>;
+    case 4:
+      return <h4 className={`text-lg ${baseClasses}`}>{children}</h4>;
     default:
-      throw new Error(`Size ${size} is not supported!`);
+      throw new Error(`Header size ${size} is not supported!`);
   }
 };

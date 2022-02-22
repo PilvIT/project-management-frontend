@@ -11,13 +11,15 @@ export default function IndexPage() {
         <title>Dashboard</title>
       </Head>
       <section className="col-start-2 col-span-10 space-y-5">
-        <Header size="h2">Latest Issues</Header>
         <ErrorBoundary>
+          <Header size={2}>Latest Issues</Header>
           <LatestIssues />
         </ErrorBoundary>
       </section>
       <section className="col-start-2 col-span-10 space-y-5 my-10">
-        <Header size="h2">News</Header>
+        <ErrorBoundary>
+          <Header size={2}>News</Header>
+        </ErrorBoundary>
         <NotImplemented />
       </section>
     </>

@@ -34,6 +34,6 @@ export const TechIcon = ({ name }: Props) => {
       return <SiPostgresql />;
     default:
       console.error(`Icon ${name} does not exist!`);
-      return null;
+      return <span>${name}</span>;
   }
 };

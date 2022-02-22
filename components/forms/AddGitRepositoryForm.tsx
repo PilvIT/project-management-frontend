@@ -4,6 +4,8 @@ import {
 } from "../../core/models/GitRepository";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../atoms/Button";
+import { ButtonGroup } from "../atoms/ButtonGroup";
+import { FieldGroup } from "../atoms/FieldGroup";
 import { Link } from "../atoms/Link";
 import { TextField } from "../atoms/TextField";
 import { jsonFetch } from "../../core/jsonFetch";
@@ -23,18 +25,15 @@ export const AddGitRepositoryForm = ({ className, onCreated }: Props) => {
   } = useForm<GitRepositoryCreate>({ mode: "onBlur" });
 
   const createRepository: SubmitHandler<GitRepositoryCreate> = (data) => {
-    jsonFetch("POST", `/git-repositories`, {
+    jsonFetch<GitRepositoryDetail>("POST", `/git-repositories`, {
       ...data,
       project: router.query.id,
     }).then(onCreated);
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(createRepository)}
-      className={`flex flex-col ${className}`}
-    >
-      <div>
+    <form onSubmit={handleSubmit(createRepository)} className={className}>
+      <FieldGroup>
         <TextField
           type="url"
           error={errors}
@@ -43,22 +42,21 @@ export const AddGitRepositoryForm = ({ className, onCreated }: Props) => {
           register={register}
           placeholder="https://github.com/org/project-name"
         />
-      </div>
+      </FieldGroup>
 
-      <div className="mt-5 flex items-center gap-4">
+      <ButtonGroup>
         <Button type="submit" styling={{ color: "primary" }}>
           Submit
         </Button>
         <Link
           to={`/projects/${router.query.id}`}
-          className="bg-none text-gray-400"
           styling={{
             color: "secondary",
           }}
         >
           Cancel
         </Link>
-      </div>
+      </ButtonGroup>
     </form>
   );
 };

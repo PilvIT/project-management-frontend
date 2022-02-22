@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { useRouter } from "next/router";
 
 const classes = {
-  active: "text-amber-600 underline",
+  active: "text-lime-600 underline underline-offset-2",
 };
 
 interface Props {
@@ -12,13 +12,13 @@ interface Props {
 }
 
 export const MenuLink = ({ children, href }: Props) => {
-  const router = useRouter();
+  const { pathname } = useRouter();
 
   return (
     <NextLink href={href} prefetch={false}>
       <a
-        className={`py-2 px-3
-          ${router.pathname === href ? classes.active : "text-neutral-200"}`}
+        className={`p-3 ${pathname.startsWith(href) ? classes.active : ""}
+            hover:brightness-120 hover:underline hover:underline-offset-2`}
       >
         {children}
       </a>

@@ -4,24 +4,35 @@ import { MenuLink } from "../atoms/MenuLink";
 import NextLink from "next/link";
 import { useUser } from "../hooks/useUser";
 
-export const Menu = () => {
+interface Props {
+  className?: string;
+}
+
+export const Menu = ({ className }: Props) => {
   const user = useUser();
 
   return (
-    <div className="grid grid-flow-col items-center auto-cols-max gap-5 whitespace-normal bg-stone-800 px-5">
+    <div className={`flex items-center ${className}`}>
       <NextLink href="/" prefetch={false}>
         <a>
-          <Logo className="fill-gray-200" />
+          <Logo />
         </a>
       </NextLink>
-      <div className="flex gap-5">
+      <div className="flex items-center gap-2 ml-10">
         <MenuLink href="/projects">Projects</MenuLink>
         <MenuLink href="/developers">Developers</MenuLink>
       </div>
 
-      <button className="flex grow" onClick={user.logout} aria-label="Log out">
-        <FiLogOut className="justify-self-right text-neutral-200" />
-      </button>
+      <div className="flex-grow flex flex-row-reverse items-center gap-8">
+        <button
+          onClick={user.logout}
+          className="flex items-center gap-2"
+          aria-label="Log out"
+        >
+          <FiLogOut />
+        </button>
+        <span>{user.data!.name}</span>
+      </div>
     </div>
   );
 };

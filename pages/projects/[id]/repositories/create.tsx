@@ -1,6 +1,6 @@
 import { AddGitRepositoryForm } from "../../../../components/forms/AddGitRepositoryForm";
 import { GitRepositoryDetail } from "../../../../core/models/GitRepository";
-import { PageTitle } from "../../../../components/atoms/PageTitle";
+import { Header } from "../../../../components/atoms/Header";
 import { jsonFetch } from "../../../../core/jsonFetch";
 import { useRouter } from "next/router";
 
@@ -17,8 +17,8 @@ export default function GitRepositoryCreatePage() {
   };
 
   return (
-    <div className="col-start-2 col-span-10">
-      <PageTitle className="mb-5">Add Repository</PageTitle>
+    <div className="col-start-2 col-span-10 space-y-5">
+      <Header size={1}>Add Repository</Header>
       <AddGitRepositoryForm onCreated={handleOnCreated} />
     </div>
   );

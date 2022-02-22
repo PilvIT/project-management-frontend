@@ -1,24 +1,21 @@
-import { Card } from "../../components/atoms/Card";
+import { ButtonGroup } from "../../components/atoms/ButtonGroup";
+import { ErrorBoundary } from "../../components/dev/ErrorBoundary";
+import { Header } from "../../components/atoms/Header";
 import { Link } from "../../components/atoms/Link";
 import NextHead from "next/head";
-import NextLink from "next/link";
-import { PageTitle } from "../../components/atoms/PageTitle";
-import { ProjectListDetail } from "../../core/models/Project";
-import useSWR from "swr";
+import { ProjectListDetailCard } from "../../components/organisms/ProjectListDetailCard";
+import { SwrListRenderer } from "../../components/templates/SwrListRenderer";
 
-export default function ProjectPage() {
-  const { data, error } = useSWR("/projects");
-
+export default function ProjectListPage() {
   return (
     <div className="col-span-10 col-start-2 flex flex-col space-y-5">
       <NextHead>
         <title>Projects</title>
       </NextHead>
 
-      <div className="flex items-center justify-between">
-        <PageTitle>Projects</PageTitle>
-
-        <div className="flex items-center gap-3">
+      <header className="flex items-center justify-between">
+        <Header size={1}>Projects</Header>
+        <ButtonGroup>
           <Link
             to="/projects/join"
             appearance="button"
@@ -33,29 +30,16 @@ export default function ProjectPage() {
           >
             Add Project
           </Link>
-        </div>
-      </div>
+        </ButtonGroup>
+      </header>
 
-      {data &&
-        data.map((project: ProjectListDetail) => (
-          <NextLink
-            key={project.id}
-            href={`/projects/${project.id}`}
-            prefetch={false}
-          >
-            <a>
-              <Card
-                className={`border border-gray-200 p-4 shadow-md rounded-md hover:cursor-pointer hover:border-blue-300`}
-              >
-                <div>
-                  <h2 className="text-md font-bold py-2">
-                    {project.displayName}
-                  </h2>
-                </div>
-              </Card>
-            </a>
-          </NextLink>
-        ))}
+      <ErrorBoundary name="ProjectListView">
+        <SwrListRenderer
+          url="/projects"
+          placeholder={<p>You have not joined or added any project.</p>}
+          ItemRenderer={ProjectListDetailCard}
+        />
+      </ErrorBoundary>
     </div>
   );
 }

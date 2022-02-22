@@ -41,7 +41,7 @@ export const Login = ({ onLoggedIn }: Props) => {
         <title>Login</title>
       </Head>
       <div className="h-4/6 flex flex-col space-y-5 items-center">
-        <Header size="h1">Project Management Login</Header>
+        <Header size={1}>Project Management Login</Header>
         <p>
           Service is only available to users added to the GitHub organization.
         </p>

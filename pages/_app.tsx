@@ -18,17 +18,19 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <SWRConfig
-      value={{
-        fetcher: swrFetcher(user.logout),
-        errorRetryCount: 3,
-        refreshInterval: 0,
-        focusThrottleInterval: 10_000,
-      }}
-    >
-      <LayoutAuthenticated>
-        <Component {...pageProps} />
-      </LayoutAuthenticated>
-    </SWRConfig>
+    <div className="bg-zinc-50 h-screen">
+      <SWRConfig
+        value={{
+          fetcher: swrFetcher(user.logout),
+          errorRetryCount: 3,
+          refreshInterval: 0,
+          focusThrottleInterval: 10_000,
+        }}
+      >
+        <LayoutAuthenticated>
+          <Component {...pageProps} />
+        </LayoutAuthenticated>
+      </SWRConfig>
+    </div>
   );
 }

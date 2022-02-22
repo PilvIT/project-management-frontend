@@ -16,7 +16,7 @@ export const IssueList = ({ className, data }: Props) => {
   return (
     <ul className={`font-mono flex flex-col gap-1 ${className}`}>
       {data.map((issue) => (
-        <li key={issue.id} className="">
+        <li key={issue.id}>
           <small className="opacity-80">
             {new Date(issue.createdAt).toLocaleString("en-GB")}
           </small>{" "}
