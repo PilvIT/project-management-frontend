@@ -1,9 +1,9 @@
 import { ProjectCreate, ProjectDetail } from "../../core/models/Project";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Button } from "../atoms/Button/Button";
+import { Button } from "../atoms/Button";
 import { FaPlus } from "react-icons/fa";
 import { Link } from "../atoms/Link";
-import { TextField } from "../atoms/TextField/TextField";
+import { TextField } from "../atoms/TextField";
 import { jsonFetch } from "../../core/jsonFetch";
 
 interface Props {

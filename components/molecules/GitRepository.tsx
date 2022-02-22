@@ -4,6 +4,8 @@ import { SiGithub } from "react-icons/si";
 import { GitRepositoryDetail } from "../../core/models/GitRepository";
 import { jsonFetch } from "../../core/jsonFetch";
 import { IssueList } from "./IssueList";
+import { Card } from "../atoms/Card";
+import { Header } from "../atoms/Header";
 
 interface Props {
   data: GitRepositoryDetail;
@@ -24,12 +26,12 @@ export const GitRepository = ({ data, onDeleted }: Props) => {
   };
 
   return (
-    <section className="p-4 border border-gray-400 rounded-md">
+    <Card className="p-4">
       <header className="flex justify-between">
-        <h3 className="font-bold capitalize text-lg">
+        <Header className="capitalize" size="h3">
           {data.name.replaceAll("-", " ")}
-        </h3>
-        <div className="text-2xl">
+        </Header>
+        <div className="">
           <TechnologyList data={data.technologies} />
         </div>
       </header>
@@ -53,7 +55,7 @@ export const GitRepository = ({ data, onDeleted }: Props) => {
           Update
         </button>
       </div>
-    </section>
+    </Card>
   );
 };
 

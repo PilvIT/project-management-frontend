@@ -28,7 +28,7 @@ export const Button = ({
     <button
       type={type}
       onClick={onClick}
-      className={`flex items-center gap-2 p-2 rounded-md ${
+      className={`flex items-center gap-2 py-2 px-4 rounded-md hover:brightness-110 ${
         colors[styling.color]
       } ${className}`}
     >

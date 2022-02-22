@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import NextLink from "next/link";
-import { colors as buttonColors, ButtonColors } from "./Button/Button";
+import { colors as buttonColors, ButtonColors } from "./Button";
 
 const classes = {
   link: "",

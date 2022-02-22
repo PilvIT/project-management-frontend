@@ -1,9 +1,10 @@
+import { Card } from "../../components/atoms/Card";
 import { Link } from "../../components/atoms/Link";
-import { PageTitle } from "../../components/atoms/PageTitle/PageTitle";
-import useSWR from "swr";
 import NextHead from "next/head";
 import NextLink from "next/link";
-import { ProjectDetail, ProjectListDetail } from "../../core/models/Project";
+import { PageTitle } from "../../components/atoms/PageTitle";
+import { ProjectListDetail } from "../../core/models/Project";
+import useSWR from "swr";
 
 export default function ProjectPage() {
   const { data, error } = useSWR("/projects");
@@ -42,14 +43,16 @@ export default function ProjectPage() {
             href={`/projects/${project.id}`}
             prefetch={false}
           >
-            <a
-              className={`border border-gray-200 p-4 shadow-md rounded-md hover:cursor-pointer hover:border-blue-300`}
-            >
-              <div>
-                <h2 className="text-md font-bold py-2">
-                  {project.displayName}
-                </h2>
-              </div>
+            <a>
+              <Card
+                className={`border border-gray-200 p-4 shadow-md rounded-md hover:cursor-pointer hover:border-blue-300`}
+              >
+                <div>
+                  <h2 className="text-md font-bold py-2">
+                    {project.displayName}
+                  </h2>
+                </div>
+              </Card>
             </a>
           </NextLink>
         ))}

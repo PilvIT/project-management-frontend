@@ -1,6 +1,6 @@
 import { AddGitRepositoryForm } from "../../../../components/forms/AddGitRepositoryForm";
 import { GitRepositoryDetail } from "../../../../core/models/GitRepository";
-import { PageTitle } from "../../../../components/atoms/PageTitle/PageTitle";
+import { PageTitle } from "../../../../components/atoms/PageTitle";
 import { jsonFetch } from "../../../../core/jsonFetch";
 import { useRouter } from "next/router";
 

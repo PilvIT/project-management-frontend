@@ -1,7 +1,8 @@
-import { Button } from "../atoms/Button/Button";
+import { Button } from "../atoms/Button";
 import { FaGithub } from "react-icons/fa";
 import { GitHubOAuthService } from "../../core/features/github/GitHubOAuthService";
-import { PageTitle } from "../atoms/PageTitle/PageTitle";
+import Head from "next/head";
+import { Header } from "../atoms/Header";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
@@ -13,44 +14,43 @@ export const Login = ({ onLoggedIn }: Props) => {
   const router = useRouter();
 
   const handleLogin = () => {
-    GitHubOAuthService.login(location.origin).catch(() => {
-      // TODO: handle error
-      console.error("A");
-    });
+    GitHubOAuthService.login(location.origin).catch(console.error);
   };
 
   useEffect(() => {
-    console.log(router.query);
-    if (
-      typeof router.query.code === "string" &&
-      typeof router.query.state === "string"
-    ) {
+    const { code, state } = router.query;
+    if (typeof code === "string" && typeof state === "string") {
       GitHubOAuthService.exchangeToken({
-        code: router.query.code,
-        state: router.query.state,
+        code,
+        state,
         redirectUri: location.origin,
       })
-        .then(async () => {
+        .then(() => {
           onLoggedIn();
-          await router.replace(location.pathname, undefined, {
+          return router.replace(location.pathname, undefined, {
             shallow: true,
           });
         })
-        .catch((e) => {
-          console.error(e);
-          // TODO: handle error
-        });
+        .catch(console.error);
     }
   }, [onLoggedIn, router]);
 
   return (
-    <div className="grid place-items-center auto-rows-auto h-screen">
-      <div className="h-4/6 flex flex-col gap-5">
-        <PageTitle>Project Management Login</PageTitle>
-        <Button onClick={handleLogin} styling={{ color: "primary" }}>
-          <FaGithub />
-          Sign In
-        </Button>
+    <div className="grid place-items-center h-screen">
+      <Head>
+        <title>Login</title>
+      </Head>
+      <div className="h-4/6 flex flex-col space-y-5 items-center">
+        <Header size="h1">Project Management Login</Header>
+        <p>
+          Service is only available to users added to the GitHub organization.
+        </p>
+        <div>
+          <Button onClick={handleLogin} styling={{ color: "primary" }}>
+            <FaGithub />
+            Sign In
+          </Button>
+        </div>
       </div>
     </div>
   );

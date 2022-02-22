@@ -1,15 +1,14 @@
-import { Menu } from "./organisms/Menu/Menu";
+import { Menu } from "./organisms/Menu";
 import { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
-  onLogout: () => void;
 }
 
-export const LayoutAuthenticated = ({ children, onLogout }: Props) => {
+export const LayoutAuthenticated = ({ children }: Props) => {
   return (
-    <div data-authenticated="true">
-      <Menu onLogout={onLogout} />
+    <div>
+      <Menu />
       <div className="grid grid-cols-12 gap-3 mt-8">{children}</div>
     </div>
   );

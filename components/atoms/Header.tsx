@@ -22,13 +22,11 @@ export const Header = ({ children, className, size }: Props) => {
       );
     case "h3":
       return (
-        <h3 className={`font-serif text-b text-2xl ${className}`}>
-          {children}
-        </h3>
+        <h3 className={`font-serif text-b text-xl ${className}`}>{children}</h3>
       );
     case "h4":
       return (
-        <h4 className={`font-serif text-b text-xl ${className}`}>{children}</h4>
+        <h4 className={`font-serif text-b text-lg ${className}`}>{children}</h4>
       );
     default:
       throw new Error(`Size ${size} is not supported!`);

@@ -1,5 +1,5 @@
 import { CreateProjectForm } from "../../components/forms/CreateProjectForm";
-import { PageTitle } from "../../components/atoms/PageTitle/PageTitle";
+import { PageTitle } from "../../components/atoms/PageTitle";
 import { ProjectDetail } from "../../core/models/Project";
 import { useRouter } from "next/router";
 

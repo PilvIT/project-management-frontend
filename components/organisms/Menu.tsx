@@ -1,13 +1,12 @@
 import { FiLogOut } from "react-icons/fi";
-import { Logo } from "../../svg/Logo";
-import { MenuLink } from "../../atoms/MenuLink/MenuLink";
+import { Logo } from "../svg/Logo";
+import { MenuLink } from "../atoms/MenuLink";
 import NextLink from "next/link";
+import { useUser } from "../hooks/useUser";
 
-interface Props {
-  onLogout: () => void;
-}
+export const Menu = () => {
+  const user = useUser();
 
-export const Menu = ({ onLogout }: Props) => {
   return (
     <div className="grid grid-flow-col items-center auto-cols-max gap-5 whitespace-normal bg-stone-800 px-5">
       <NextLink href="/" prefetch={false}>
@@ -20,7 +19,7 @@ export const Menu = ({ onLogout }: Props) => {
         <MenuLink href="/developers">Developers</MenuLink>
       </div>
 
-      <button className="flex grow" onClick={onLogout} aria-label="Log out">
+      <button className="flex grow" onClick={user.logout} aria-label="Log out">
         <FiLogOut className="justify-self-right text-neutral-200" />
       </button>
     </div>

@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { useRouter } from "next/router";
-import { PageTitle } from "../../components/atoms/PageTitle/PageTitle";
+import { PageTitle } from "../../components/atoms/PageTitle";
 import { Link } from "../../components/atoms/Link";
 import { GitRepository } from "../../components/molecules/GitRepository";
 import { ProjectDetail } from "../../core/models/Project";

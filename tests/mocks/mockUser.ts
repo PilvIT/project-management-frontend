@@ -1,5 +1,5 @@
-import { UserModel } from "../../types/models/UserModel";
+import { UserDetail } from "../../core/models/User";
 
-export const mockUser: UserModel = {
+export const mockUser: UserDetail = {
   name: "Luke Skywalker",
 };

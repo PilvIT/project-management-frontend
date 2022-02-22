@@ -30,6 +30,9 @@ export const useMockApi = async (
       });
     }
 
-    throw new Error(`Unhandled route: ${request.method()} ${request.url()}`);
+    console.warn(`Unhandled route in: ${request.method()} ${request.url()}`);
+    return route.fulfill({
+      status: 404,
+    });
   });
 };

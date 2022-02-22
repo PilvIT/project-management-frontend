@@ -3,9 +3,9 @@ import {
   GitRepositoryDetail,
 } from "../../core/models/GitRepository";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Button } from "../atoms/Button/Button";
+import { Button } from "../atoms/Button";
 import { Link } from "../atoms/Link";
-import { TextField } from "../atoms/TextField/TextField";
+import { TextField } from "../atoms/TextField";
 import { jsonFetch } from "../../core/jsonFetch";
 import { useRouter } from "next/router";
 

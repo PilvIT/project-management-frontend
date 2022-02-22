@@ -1,4 +1,4 @@
-import { IssueDetail, IssueLogLevels } from "../../core/models/IssueDetail";
+import { IssueDetail, IssueLogLevels } from "../../core/models/Issue";
 
 const logColors: Record<IssueLogLevels, string> = {
   info: "",
