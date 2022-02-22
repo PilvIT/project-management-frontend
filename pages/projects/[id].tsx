@@ -1,6 +1,7 @@
 import { ErrorBoundary } from "../../components/dev/ErrorBoundary";
 import { GitRepositoryListDetailCard } from "../../components/organisms/GitRepositoryListDetailCard";
 import { Header } from "../../components/atoms/Header";
+import { LayoutSection } from "../../components/atoms/LayoutSection";
 import { Link } from "../../components/atoms/Link";
 import { ProjectDetail } from "../../core/models/Project";
 import { SwrListRenderer } from "../../components/templates/SwrListRenderer";
@@ -8,6 +9,7 @@ import { TemporaryFeature } from "../../components/dev/TemporaryFeature";
 import { jsonFetch } from "../../core/jsonFetch";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+
 export default function ProjectPage() {
   const router = useRouter();
   const { id } = router.query;
@@ -25,7 +27,7 @@ export default function ProjectPage() {
   }
 
   return (
-    <div className="col-start-2 col-span-10 space-y-5">
+    <LayoutSection>
       <header>
         <Header size={1}>
           {data.group} / {data.name}
@@ -59,9 +61,10 @@ export default function ProjectPage() {
               <p>You have not added any repository to the project.</p>
             }
             ItemRenderer={GitRepositoryListDetailCard}
+            className="flex-col"
           />
         )}
       </ErrorBoundary>
-    </div>
+    </LayoutSection>
   );
 }

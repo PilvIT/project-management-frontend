@@ -1,8 +1,10 @@
 import { ErrorBoundary } from "../components/dev/ErrorBoundary";
 import Head from "next/head";
 import { Header } from "../components/atoms/Header";
-import { LatestIssues } from "../components/organisms/LatestIssues";
+import { LatestIssueListDetailCard } from "../components/organisms/LatestIssueListDetailCard";
+import { LayoutSection } from "../components/atoms/LayoutSection";
 import { NotImplemented } from "../components/dev/NotImplemented";
+import { SwrListRenderer } from "../components/templates/SwrListRenderer";
 
 export default function IndexPage() {
   return (
@@ -10,18 +12,25 @@ export default function IndexPage() {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <section className="col-start-2 col-span-10 space-y-5">
+      <LayoutSection>
         <ErrorBoundary>
           <Header size={2}>Latest Issues</Header>
-          <LatestIssues />
+          <SwrListRenderer
+            url="/git-repositories?hasIssues=true"
+            placeholder={
+              <p>The projects you are part of does not have any issues.</p>
+            }
+            ItemRenderer={LatestIssueListDetailCard}
+            className="flex-wrap basis-1/3"
+          />
         </ErrorBoundary>
-      </section>
-      <section className="col-start-2 col-span-10 space-y-5 my-10">
+      </LayoutSection>
+      <LayoutSection>
         <ErrorBoundary>
           <Header size={2}>News</Header>
         </ErrorBoundary>
         <NotImplemented />
-      </section>
+      </LayoutSection>
     </>
   );
 }

@@ -10,7 +10,7 @@ interface Props {
   onLoggedIn: () => void;
 }
 
-export const Login = ({ onLoggedIn }: Props) => {
+export const LoginView = ({ onLoggedIn }: Props) => {
   const router = useRouter();
 
   const handleLogin = () => {

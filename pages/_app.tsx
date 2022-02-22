@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { LayoutAuthenticated } from "../components/LayoutAuthenticated";
-import { Login } from "../components/organisms/Login";
+import { LoginView } from "../components/organisms/LoginView";
 import { SWRConfig } from "swr";
 import { swrFetcher } from "../core/swrFetcher";
 import { useUser } from "../components/hooks/useUser";
@@ -14,7 +14,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   }
 
   if (!user.data) {
-    return <Login onLoggedIn={user.mutate} />;
+    return <LoginView onLoggedIn={user.mutate} />;
   }
 
   return (

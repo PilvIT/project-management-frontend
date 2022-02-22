@@ -1,4 +1,5 @@
 import { FiLogOut } from "react-icons/fi";
+import { Link } from "../atoms/Link";
 import { Logo } from "../svg/Logo";
 import { MenuLink } from "../atoms/MenuLink";
 import NextLink from "next/link";
@@ -31,7 +32,9 @@ export const Menu = ({ className }: Props) => {
         >
           <FiLogOut />
         </button>
-        <span>{user.data!.name}</span>
+        <Link to="/profile" styling={{ color: "secondary" }}>
+          {user.data!.name}
+        </Link>
       </div>
     </div>
   );

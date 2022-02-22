@@ -3,7 +3,7 @@ import NextLink from "next/link";
 import { ReactNode } from "react";
 
 const classes = {
-  link: "",
+  link: "hover:brightness-110 hover:underline hover:underline-offset-2",
   button: "block py-2 px-4 rounded-md md:w-fit",
 };
 

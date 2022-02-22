@@ -30,7 +30,7 @@ export const SwrListRenderer = <T,>({
   }
 
   return (
-    <div className={`flex flex-col gap-5 ${className}`}>
+    <div className={`flex gap-5 ${className}`}>
       {data.data.map((item: any) => (
         <ItemRenderer key={item.id} data={item} onMutated={mutate} />
       ))}

@@ -1,6 +1,7 @@
 import { ButtonGroup } from "../../components/atoms/ButtonGroup";
 import { ErrorBoundary } from "../../components/dev/ErrorBoundary";
 import { Header } from "../../components/atoms/Header";
+import { LayoutSection } from "../../components/atoms/LayoutSection";
 import { Link } from "../../components/atoms/Link";
 import NextHead from "next/head";
 import { ProjectListDetailCard } from "../../components/organisms/ProjectListDetailCard";
@@ -8,7 +9,7 @@ import { SwrListRenderer } from "../../components/templates/SwrListRenderer";
 
 export default function ProjectListPage() {
   return (
-    <div className="col-span-10 col-start-2 flex flex-col space-y-5">
+    <LayoutSection>
       <NextHead>
         <title>Projects</title>
       </NextHead>
@@ -38,8 +39,9 @@ export default function ProjectListPage() {
           url="/projects"
           placeholder={<p>You have not joined or added any project.</p>}
           ItemRenderer={ProjectListDetailCard}
+          className="flex-col"
         />
       </ErrorBoundary>
-    </div>
+    </LayoutSection>
   );
 }
