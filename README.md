@@ -39,3 +39,7 @@ yarn test:headed --project=chromium ./path/to/test-file
 ```
 
 Add the `await page.pause()` in the beginning of the test, and you can click the browser manually.
+
+## License
+
+The content of this repository is licensed under [MIT License](./LICENSE).
